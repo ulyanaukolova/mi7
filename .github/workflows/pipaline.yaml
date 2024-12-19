@@ -1,0 +1,31 @@
+name: jjjj
+
+on:
+  push:
+    branches:
+      - vetk7
+  pull_request:
+    branches:
+      - vetk7
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Proverka repository
+      uses: actions/checkout@v2
+
+    - name: Ustanovka Net
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Dogruzka Nuget
+      run: nuget restore ULLLL.sln
+
+    - name: Build
+      run: |
+        msbuild ULLLL.sln /p:Configuration=Release
+
+    - name: Zapusk Analyz
+      run: |
+        msbuild ULLLL.sln /p:Configuration=Release /p:RunCodeAnalysis=true
